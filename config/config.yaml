@@ -1,0 +1,13 @@
+project:
+  name: ReconAI
+  version: 1.0
+
+scan:
+  threads: 50
+  timeout: 15
+
+output:
+  directory: output/
+
+ai:
+  provider: openai

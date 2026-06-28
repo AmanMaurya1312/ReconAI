@@ -1,0 +1,18 @@
+from rich.console import Console
+
+console = Console()
+
+
+def show_banner():
+    banner = r"""
+██████╗ ███████╗ ██████╗ ██████╗ ███╗   ██╗
+██╔══██╗██╔════╝██╔════╝██╔═══██╗████╗  ██║
+██████╔╝█████╗  ██║     ██║   ██║██╔██╗ ██║
+██╔══██╗██╔══╝  ██║     ██║   ██║██║╚██╗██║
+██║  ██║███████╗╚██████╗╚██████╔╝██║ ╚████║
+╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝
+"""
+
+    console.print(banner, style="bold cyan")
+    console.print("[bold green]ReconAI v1.0[/bold green]")
+    console.print("[yellow]AI Powered Bug Bounty Framework[/yellow]\n")

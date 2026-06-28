@@ -1,9 +1,4 @@
-from rich.console import Console
+from cli.app import app
 
-console = Console()
-
-console.print()
-
-console.print("[bold green]ReconAI Started[/bold green]")
-
-console.print()
+if __name__ == "__main__":
+    app()
