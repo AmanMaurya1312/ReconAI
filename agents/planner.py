@@ -1,18 +1,19 @@
 from models.target import Target
-from scanners.manager import ScannerManager
+from workflow.engine import WorkflowEngine
 
 
 class PlannerAgent:
     """
     Planner Agent.
 
-    Decides which scanners should execute.
+    Decides which workflow should execute.
     """
 
     def __init__(self):
-
-        self.manager = ScannerManager()
+        self.engine = WorkflowEngine()
 
     def execute(self, target: Target):
-
-        return self.manager.run(target)
+        """
+        Execute the reconnaissance workflow.
+        """
+        return self.engine.execute(target)

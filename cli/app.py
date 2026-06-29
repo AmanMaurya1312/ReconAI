@@ -44,7 +44,8 @@ def scan(
         )
     )
 
-    results = planner.execute(target)
+    # Workflow returns (ExecutionContext, ScanResults)
+    context, results = planner.execute(target)
 
     console.print()
 
@@ -57,7 +58,10 @@ def scan(
             console.print(f"Target       : {result.target.domain}")
             console.print(f"Discovered   : {result.item_count}")
             console.print(f"Time         : {result.execution_time:.2f} sec")
-            console.print(f"Output File  : {result.output_file}")
+
+            if result.output_file:
+                console.print(f"Output File  : {result.output_file}")
+
             console.print("-" * 50)
 
         else:
@@ -67,6 +71,17 @@ def scan(
 
             for error in result.errors:
                 console.print(f"[red]{error}[/red]")
+
+    # Workflow Summary
+    console.print()
+    console.print(
+        Panel.fit(
+            "[bold cyan]Workflow Summary[/bold cyan]"
+        )
+    )
+
+    console.print(f"Subdomains : {len(context.subdomains)}")
+    console.print(f"Live Hosts : {len(context.live_hosts)}")
 
 
 @app.command()

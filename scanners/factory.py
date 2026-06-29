@@ -1,5 +1,5 @@
 from scanners.subfinder import SubfinderScanner
-
+from scanners.httpx import HttpxScanner
 
 class ScannerFactory:
     """
@@ -11,4 +11,5 @@ class ScannerFactory:
 
         return [
             SubfinderScanner,
+	    HttpxScanner,
         ]
