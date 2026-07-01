@@ -5,29 +5,25 @@ from scanners.base import BaseScanner
 from utils.command_runner import CommandRunner
 
 
-class SubfinderScanner(BaseScanner):
+class GauScanner(BaseScanner):
 
     @property
     def name(self) -> str:
-        return "subfinder"
+        return "gau"
 
     def run(self) -> ScanResult:
 
         start = time.perf_counter()
 
-        output_file = self.target.output_dir / "subfinder.txt"
-
-        output_file.parent.mkdir(
-            parents=True,
-            exist_ok=True,
-        )
+        output_file = self.target.output_dir / "gau.txt"
 
         command = [
-            "subfinder",
-            "-silent",
-            "-d",
+            "gau",
             self.target.domain,
-            "-o",
+            "--subs",
+            "--providers",
+            "wayback,commoncrawl,otx,urlscan",
+            "--o",
             str(output_file),
         ]
 
@@ -46,16 +42,15 @@ class SubfinderScanner(BaseScanner):
             )
 
         if output_file.exists():
-            data = [
+            urls = sorted(set(
                 line.strip()
                 for line in output_file.read_text().splitlines()
                 if line.strip()
-            ]
+            ))
         else:
-            data = []
+            urls = []
 
-        # Store subdomains in shared workflow context
-        self.context.add_subdomains(data)
+        self.context.add_urls(urls)
 
         return ScanResult(
             scanner=self.name,
@@ -63,8 +58,8 @@ class SubfinderScanner(BaseScanner):
             success=True,
             execution_time=elapsed,
             output_file=output_file,
-            data=data,
+            data=urls,
             metadata={
-                "count": len(data),
+                "count": len(urls),
             },
         )

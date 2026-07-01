@@ -74,7 +74,7 @@ class KatanaScanner(BaseScanner):
         else:
             urls = []
 
-        self.context.urls.extend(urls)
+        self.context.add_urls(urls)
 
         return ScanResult(
             scanner=self.name,

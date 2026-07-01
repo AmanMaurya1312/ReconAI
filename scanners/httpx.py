@@ -74,7 +74,7 @@ class HttpxScanner(BaseScanner):
         else:
             live_hosts = []
 
-        self.context.live_hosts.extend(live_hosts)
+        self.context.add_live_hosts(live_hosts)
 
         return ScanResult(
             scanner=self.name,

@@ -1,6 +1,7 @@
 from scanners.subfinder import SubfinderScanner
 from scanners.httpx import HttpxScanner
 from scanners.katana import KatanaScanner
+from scanners.gau import GauScanner
 
 class ScannerFactory:
     """
@@ -14,4 +15,5 @@ class ScannerFactory:
             SubfinderScanner,
 	        HttpxScanner,
             KatanaScanner,
+            GauScanner,
         ]
