@@ -9,6 +9,9 @@ class ExecutionContext:
 
     target: str
 
+    # Development mode
+    fast: bool = False
+
     subdomains: list[str] = field(default_factory=list)
     live_hosts: list[str] = field(default_factory=list)
     urls: list[str] = field(default_factory=list)

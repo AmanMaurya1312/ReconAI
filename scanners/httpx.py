@@ -47,6 +47,20 @@ class HttpxScanner(BaseScanner):
             str(output_file),
         ]
 
+        # Fast Development Mode
+        if self.context.fast:
+            command.extend([
+                "-threads", "50",
+                "-timeout", "5",
+                "-retries", "1",
+            ])
+        else:
+            command.extend([
+                "-threads", "200",
+                "-timeout", "10",
+                "-retries", "2",
+            ])
+
         result = CommandRunner.run(command)
 
         elapsed = time.perf_counter() - start
@@ -54,7 +68,6 @@ class HttpxScanner(BaseScanner):
         input_file.unlink(missing_ok=True)
 
         if result.returncode != 0:
-
             return ScanResult(
                 scanner=self.name,
                 target=self.target,

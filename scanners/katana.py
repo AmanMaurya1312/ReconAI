@@ -47,6 +47,20 @@ class KatanaScanner(BaseScanner):
             str(output_file),
         ]
 
+        # -------------------------
+        # Fast Development Mode
+        # -------------------------
+        if self.context.fast:
+            command.extend([
+                "-depth", "1",
+                "-concurrency", "10",
+            ])
+        else:
+            command.extend([
+                "-depth", "3",
+                "-concurrency", "50",
+            ])
+
         result = CommandRunner.run(command)
 
         elapsed = time.perf_counter() - start

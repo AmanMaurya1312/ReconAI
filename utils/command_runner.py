@@ -14,7 +14,7 @@ class CommandRunner:
     def run(
         command: list[str],
         cwd: Optional[Path] = None,
-        timeout: int = 300,
+        timeout: int = 1200,
     ) -> subprocess.CompletedProcess:
 
         logger.info(f"Running command: {' '.join(command)}")

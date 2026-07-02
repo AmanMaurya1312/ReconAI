@@ -22,8 +22,13 @@ def scan(
         ...,
         "--domain",
         "-d",
-        help="Target Domain"
-    )
+        help="Target Domain",
+    ),
+    fast: bool = typer.Option(
+        False,
+        "--fast",
+        help="Fast development mode.",
+    ),
 ):
     show_banner()
 
@@ -40,12 +45,14 @@ def scan(
     console.print(
         Panel.fit(
             "[yellow]Planner Agent Started[/yellow]",
-            title="ReconAI"
+            title="ReconAI",
         )
     )
 
-    # Workflow returns (ExecutionContext, ScanResults)
-    context, results = planner.execute(target)
+    context, results = planner.execute(
+        target,
+        fast=fast,
+    )
 
     console.print()
 
@@ -72,7 +79,6 @@ def scan(
             for error in result.errors:
                 console.print(f"[red]{error}[/red]")
 
-    # Workflow Summary
     console.print()
     console.print(
         Panel.fit(
@@ -82,6 +88,9 @@ def scan(
 
     console.print(f"Subdomains : {len(context.subdomains)}")
     console.print(f"Live Hosts : {len(context.live_hosts)}")
+    console.print(f"URLs       : {len(context.urls)}")
+    console.print(f"Parameters : {len(context.parameters)}")
+    console.print(f"Findings   : {len(context.findings)}")
 
 
 @app.command()

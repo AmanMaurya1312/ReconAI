@@ -42,11 +42,13 @@ class GauScanner(BaseScanner):
             )
 
         if output_file.exists():
-            urls = sorted(set(
-                line.strip()
-                for line in output_file.read_text().splitlines()
-                if line.strip()
-            ))
+            urls = sorted(
+                set(
+                    line.strip()
+                    for line in output_file.read_text().splitlines()
+                    if line.strip()
+                )
+            )
         else:
             urls = []
 

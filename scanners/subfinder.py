@@ -31,7 +31,10 @@ class SubfinderScanner(BaseScanner):
             str(output_file),
         ]
 
-        result = CommandRunner.run(command)
+        result = CommandRunner.run(
+            command,
+            timeout=180,
+        )
 
         elapsed = time.perf_counter() - start
 
@@ -54,8 +57,10 @@ class SubfinderScanner(BaseScanner):
         else:
             data = []
 
-        # Store subdomains in shared workflow context
+        # Save unique subdomains into shared context
         self.context.add_subdomains(data)
+
+        unique_subdomains = self.context.subdomains
 
         return ScanResult(
             scanner=self.name,
@@ -63,8 +68,9 @@ class SubfinderScanner(BaseScanner):
             success=True,
             execution_time=elapsed,
             output_file=output_file,
-            data=data,
+            data=unique_subdomains,
             metadata={
-                "count": len(data),
+                "raw_count": len(data),
+                "unique_count": len(unique_subdomains),
             },
         )

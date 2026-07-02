@@ -12,8 +12,15 @@ class PlannerAgent:
     def __init__(self):
         self.engine = WorkflowEngine()
 
-    def execute(self, target: Target):
+    def execute(
+        self,
+        target: Target,
+        fast: bool = False,
+    ):
         """
         Execute the reconnaissance workflow.
         """
-        return self.engine.execute(target)
+        return self.engine.execute(
+            target,
+            fast=fast,
+        )

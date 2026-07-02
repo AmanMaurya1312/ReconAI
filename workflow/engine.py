@@ -11,11 +11,18 @@ class WorkflowEngine:
     def __init__(self):
         self.manager = ScannerManager()
 
-    def execute(self, target: Target):
+    def execute(
+        self,
+        target: Target,
+        fast: bool = False,
+    ):
 
         context = ExecutionContext(
             target=target.domain,
         )
+
+        # Fast mode flag
+        context.fast = fast
 
         results = self.manager.run(
             target=target,
