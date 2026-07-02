@@ -2,6 +2,7 @@ from scanners.subfinder import SubfinderScanner
 from scanners.httpx import HttpxScanner
 from scanners.katana import KatanaScanner
 from scanners.gau import GauScanner
+from scanners.nuclei import NucleiScanner
 
 
 class ScannerFactory:
@@ -17,5 +18,6 @@ class ScannerFactory:
 	        HttpxScanner,
             KatanaScanner,
             GauScanner,
+            NucleiScanner,
             
         ]
